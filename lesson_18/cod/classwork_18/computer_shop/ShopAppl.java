@@ -9,7 +9,7 @@ package classwork_18.computer_shop;
 import classwork_18.computer_shop.model.Computer;
 import classwork_18.computer_shop.model.Laptop;
 
-    public class ShopAppl {
+public class ShopAppl {
         public static void main(String[] args) {
 
             Computer computer = new Computer("i7", 8, 256, "Acer", 1200);
@@ -25,30 +25,43 @@ import classwork_18.computer_shop.model.Laptop;
             computers[3] = new Laptop("Apple", 8, 256, "MacBook", 2000,  14, 1.5, 10, "white");
             computers[4] = new Laptop("Apple", 16, 512, "MacBook Air", 2500,  14.2, 1.8, 12, "black");
 
+
+            double totalWeight = 0;
+            for ( int i = 0 ;i < computers.length; i++){
+                if(computers[i] instanceof Laptop){
+                    Laptop myLaptop = (Laptop) computers[i]; // upper casting
+                    totalWeight += myLaptop.getWeight();
+                }
+            }
+
+            System.out.println("Total weight = " + totalWeight);
+
+            System.out.println("=================================");
+
             int totalSsd = 0;
-              for (int i = 0; i < computers.length; i++) {
+            for (int i = 0; i < computers.length; i++) {
                 totalSsd += computers[i].getSsd();
-              }
+            }
 
             System.out.println("Total ssd: " + totalSsd);
 
             double totalPrice = 0;
-              for (int i = 0; i < computers.length; i++) {
+            for (int i = 0; i < computers.length; i++) {
                 totalPrice += computers[i].getPrice();
-              }
+            }
 
             System.out.println("Total price: " + totalPrice);
 
             System.out.println("---------------------------------------");
 
-              for (int i = 0; i < computers.length; i++) {
+            for (int i = 0; i < computers.length; i++) {
                 System.out.println(computers[i]);
-              };
+            };
 
             System.out.println("---------------------------------------");
-              for (int i = 0; i < computers.length; i++) {
+            for (int i = 0; i < computers.length; i++) {
                 System.out.println(computers[i].getBrand());
-              };
+            };
 
         }
     }
