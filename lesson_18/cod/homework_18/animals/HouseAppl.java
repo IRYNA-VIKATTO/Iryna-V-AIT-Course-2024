@@ -15,7 +15,7 @@ public class HouseAppl{
 
 
         Cat cat1 = new Cat(1,"Кот",2,"Барсик","Сиамский",0.25,5);
-        Cat cat2 = new Cat(2,"Кошка",1.5,"Ева","Симская",0.23,3.5);
+        Cat cat2 = new Cat(2,"Кошка",1.5,"Ева","Сиамская",0.23,3.5);
         Cat cat3 = new Cat(3,"Кот",4,"Вася","Дворняга",0.30,6);
         System.out.println(cat1);
         System.out.println(cat2);
