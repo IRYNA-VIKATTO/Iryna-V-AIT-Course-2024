@@ -11,7 +11,7 @@ class StringWithNumbersTest {
 
     @BeforeEach
     void setUp() {
-        stringWithNumbers = new StringWithNumbers("123 321 10");//454
+        stringWithNumbers = new StringWithNumbers("1 3 1");//5
 
 
 
@@ -20,11 +20,11 @@ class StringWithNumbersTest {
     @Test
     void sumOfNumbersInStringTest(){
 
-        String str = "123 321 10";
-        int expected = 454;
+        String str = "1 3 1";
+        int expected = 5;
         int actual = stringWithNumbers.sumOfNumbersInString(str);
         assertEquals(expected, actual);
-        
+
     }
 
 }
