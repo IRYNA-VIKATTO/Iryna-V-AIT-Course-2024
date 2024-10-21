@@ -1,9 +1,10 @@
 package homework_24.dokument_archive.controller;
 
 import classwork_24.book_library.model.Book;
+import homework_24.dokument_archive.dao.ArchiveCRUD;
 import homework_24.dokument_archive.model.Document;
 
-public class Archive {
+public class Archive implements ArchiveCRUD {
 
     // Поля
     private Document[] documents;  // Массив для хранения документов
@@ -83,6 +84,16 @@ public class Archive {
             System.out.println(documents[i]);
         }
     }
+    public Document findDocumentByAuthor(String author) {
+        for (int i = 0; i < size; i++) { // size - текущее количество документов
+            if (documents[i].getAuthor().equalsIgnoreCase(author)) {
+                return documents[i]; // Возвращаем первый найденный документ
+            }
+        }
+        return null; // Если документ с таким автором не найден
+    }
+
+
 }
 
 

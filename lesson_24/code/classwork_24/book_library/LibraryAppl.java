@@ -1,6 +1,7 @@
 package classwork_24.book_library;
 
 
+
 import classwork_24.book_library.controller.Library;
 import classwork_24.book_library.model.Book;
 
@@ -36,6 +37,13 @@ public class LibraryAppl {
 
         library.printBooks();
         System.out.println(library.size());
+
+
+        System.out.println("_________________________________");
+
+
+
+
 
 
     }

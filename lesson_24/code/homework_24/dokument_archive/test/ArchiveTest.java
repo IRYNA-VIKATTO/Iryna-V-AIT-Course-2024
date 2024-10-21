@@ -58,4 +58,10 @@ class ArchiveTest {
         assertNull(archive.removeDocument(1_234_567_899L)); // Попытка удалить несуществующий документ
     }
 
+    @Test
+    void findDocumentByAuthor(){
+        assertEquals(documents[0], archive.findDocumentByAuthor("Author1"));
+        assertNull(archive.findDocumentByAuthor("Author9"));
+    }
+
 }

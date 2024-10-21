@@ -1,5 +1,12 @@
 package classwork_24.book_library.controller;
 
+import classwork_24.book_library.model.Book;
+import homework_27.ait.book.dao.LibraryCRUD;
+
+public class Library implements LibraryCRUD {
+
+
+
 //Реализовать методы:
 //        - печать списка всех книг в библиотеке; +
 //        - получение кол-ва книг в библиотеке; +
@@ -10,84 +17,101 @@ package classwork_24.book_library.controller;
 //           - не добавлять больше, чем может вместить в себя библиотека.
 //        - удаление книги из библиотеки.
 
+        // fields
+        private Book[] books;
+        private int size;// текущее кол-во книг
+        private String author;
 
-import classwork_24.book_library.model.Book;
 
-public class Library {
-
-    // fields
-    private Book[] books;
-    private int size; // текущее кол-во книг
-
-    // constructor
-    public Library(int capacity) {
-        this.books = new Book[capacity];
-        this.size = 0;
-    }
-
-    // CRUD methods
-    public boolean addBook(Book book){
-        // negative cases
-        if(book == null){
-            return false;
+        // constructor
+        public Library(int capacity) {
+            this.books = new Book[capacity];
+            this.size = 0;
         }
-        if(size == books.length){
-            return false;
-        }
-        if (!(findBook(book.getIsbn()) == null)) {
-            return false;
-        }
-        // positive case
-        books[size] = book; // ставим книгу в конец массива, первое свободное место
-        size++;
-        return true;
-    }
 
-    // void printBooks()
-    public void printBooks() {
-        for (int i = 0; i < size; i++) {
-            System.out.println(books[i]);
+        // CRUD methods
+        public boolean addBook(Book book){
+            // negative cases
+            if(book == null){
+                return false;
+            }
+            if(size == books.length){
+                return false;
+            }
+            if (!(findBook(book.getIsbn()) == null)) {
+                return false;
+            }
+            // positive case
+            books[size] = book; // ставим книгу в конец массива, первое свободное место
+            size++;
+            return true;
         }
-    }
+
+        // void printBooks()
+        public void printBooks() {
+            for (int i = 0; i < size; i++) {
+                System.out.println(books[i]);
+            }
+        }
 
     // find by author
-    public Book findByAuthor(String author){
-        for (int i = 0; i < size; i++) {
-            if(books[i].getAuthor().equals(author)){
-                return books[i];
+     public Book findByAuthor(String author){
+            for (int i = 0; i < size; i++) {
+                if(books[i].getAuthor().equalsIgnoreCase(author) ){
+                    return books[i];
+                }
             }
+            return null;
         }
-        return null;
-    }
 
 
-    public Book findBook(long isbn){
-        for (int i = 0; i < size; i++) {
-            if(books[i].getIsbn() == isbn){
-                return books[i];
+        public Book findBook(long isbn){
+            for (int i = 0; i < size; i++) {
+                if(books[i].getIsbn() == isbn){
+                    return books[i];
+                }
             }
+            return null;
         }
-        return null;
-    }
 
-    public Book removeBook(long isbn){
-        for (int i = 0; i < size; i++) {
-            if(books[i].getIsbn() == isbn){
-                Book victim = books[i];
-                books[i] = books[size - 1];// last book put instead victim
-                books[size - 1] = null;// затираем последний элемент массива
-                size--;
-                return victim;
+        public Book removeBook(long isbn){
+            for (int i = 0; i < size; i++) {
+                if(books[i].getIsbn() == isbn){
+                    Book victim = books[i];
+                    books[i] = books[size - 1];// last book put instead victim
+                    books[size - 1] = null;// затираем последний элемент массива
+                    size--;
+                    return victim;
+                }
             }
+            return null;
         }
-        return null;
+
+    @Override
+    public int size(int size) {
+        return 0;
     }
 
     // boolean updateBook()
+        public int size(){
+            return size;
+        }
 
-    public int size(){
+    @Override
+    public void createBook(Book book) {
 
-        return size;
     }
+
+    public Book getBookByAuthor(String author){
+        for (Book book : books) { // books - это коллекция книг)
+            if (book.getAuthor().equalsIgnoreCase(author)) {
+                return book; // Если нашли книгу с заданным автором, возвращаем её
+            }
+        }
+        return null;
+    }
+
+
+
 
 }

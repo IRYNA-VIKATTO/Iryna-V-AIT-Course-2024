@@ -9,6 +9,7 @@ public class Document {
     public static final int DOCUMENT_ID_LENGTH = 10; // Константа для длины ID
 
     // Поля класса
+
     private String title;
     private String author;
     private long documentId; // Уникальный номер документа (10 цифр)

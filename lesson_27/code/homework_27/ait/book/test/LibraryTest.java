@@ -1,14 +1,14 @@
-package classwork_24.book_library.test;
-
+package homework_27.ait.book.test;
 
 import classwork_24.book_library.controller.Library;
 import classwork_24.book_library.model.Book;
 import org.junit.jupiter.api.BeforeEach;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class LibraryTest {
+
     Library library;
 
     Book[] books;
@@ -31,9 +31,10 @@ class LibraryTest {
             library.addBook(books[i]);
         }
     }
+    // method addBook : boolean (true, false)
 
     @Test
-    void addBookTest(){
+    void addBookTest() {
         // - не добавлять null
         assertFalse(library.addBook(null));
         //  - не добавлять дубликат
@@ -46,31 +47,30 @@ class LibraryTest {
         Book oneMoreBook = new Book("T5", "A5", 1_111_111_111_115L, 2024);
         assertFalse(library.addBook(oneMoreBook));
 
-
     }
 
     @Test
-    void printBooksTest(){
+    void printBooksTest() {
         System.out.println("=========================");
         library.printBooks();
     }
 
     @Test
+    void updateBookTest() {
+        Book newBook = new Book("New book", "Super Puper", 1_111_111_111_114L, 2025);
+        library.addBook(newBook);
+        // library.update
+    }
+
+    @Test
     void findBookTest() {
         Book foundBook = library.findBook(1_111_111_111_110L);
-        assertEquals(books[0], library.findBook(1_111_111_111_110L)); // find existed book
+        assertEquals( books[0], library.findBook(1_111_111_111_110L)); // find existed book
         assertNull(library.findBook(1_111_111_111_119L)); // find absent book
-        //
-    }
-
-
-    @Test
-    void sizeTest(){
-        assertEquals(4, library.size());
     }
 
     @Test
-    void removeBookTest(){
+    void removeBookTest() {
         // remove existed book
         assertEquals(books[0], library.removeBook(1_111_111_111_110L));
         assertEquals( 3, library.size());
@@ -79,10 +79,15 @@ class LibraryTest {
     }
 
     @Test
-    void updateBookTest(){
-        Book newBook = new Book("New book", "Super Puper", 1_111_111_111_114L, 2025);
-        library.addBook(newBook);
-        // library.update
+    void sizeTest() {
+        assertEquals(4, library.size());
+    }
 
+    @Test
+    void findByAuthor(){
+        Book findByAuthor = library.findByAuthor("A2");
+
+        assertEquals(books[2],library.findByAuthor("A2"));
+        assertNull(library.findByAuthor("A7"));
     }
 }
