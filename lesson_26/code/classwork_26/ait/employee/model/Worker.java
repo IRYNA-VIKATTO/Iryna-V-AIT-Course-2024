@@ -21,6 +21,7 @@ public class Worker extends Employee {
 
     @Override
     public double calcSalary() {
-        return 0;
+        double salary = hours * grade;
+        return ensureSalary(salary);
     }
 }

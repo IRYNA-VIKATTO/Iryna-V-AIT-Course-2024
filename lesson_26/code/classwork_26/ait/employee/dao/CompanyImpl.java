@@ -1,6 +1,7 @@
 package classwork_26.ait.employee.dao;
 
 import classwork_26.ait.employee.model.Employee;
+import classwork_26.ait.employee.model.SalesManeger;
 
 public class CompanyImpl implements Company{
 
@@ -76,21 +77,69 @@ public class CompanyImpl implements Company{
 
     @Override
     public double totalSalary() {
-        return 0;
+        double totalSalaray = 0;
+        for (int i = 0; i < size; i++) {
+            totalSalaray += employees[i].calcSalary();
+        }
+        return  totalSalaray;
     }
 
     @Override
     public double totalSales() {
-        return 0;
+        double totalSales = 0;
+        for (int i = 0; i < size; i++) {
+            if (employees[i] instanceof SalesManeger){//проверка перед кастингом
+                SalesManeger sm = (SalesManeger) employees[i];
+                totalSales += sm.getSalesValue();
+            }
+        }
+        return totalSales;
     }
 
     @Override
-    public Employee[] findEmployeeHoursGreateThan(int hours) {
-        return new Employee[0];
+    public Employee[] findEmployeeHoursGreaterThan(int hours) {
+        int count = 0;
+        for (int i = 0; i < size; i++) {
+            if(employees[i].getHours() > hours){ // criteria
+                count++;
+            }
+        }
+        Employee[] res = new Employee[count]; // new array for results
+        // читаем массив и перекладываем рез-ты в новый
+        for (int i = 0, j = 0 ; j < res.length; i++) {
+            if(employees[i].getHours() > hours){ // criteria
+                res[j++] = employees[i];
+            }
+        }
+        return res;
+
     }
 
     @Override
     public Employee[] findEmployeeSalaryRange(double min, double max) {
-        return new Employee[0];
+        int count = 0;
+        for (int i = 0; i < size; i++) {
+            if(employees[i].calcSalary() > min && employees[i].calcSalary() < max ){ // criteria
+                count++;
+            }
+        }
+        Employee[] res = new Employee[count];
+        // читаем массив и перекладываем рез-ты в новый
+        for (int i = 0, j = 0 ; j < res.length; i++) {
+            if(employees[i].calcSalary() > min && employees[i].calcSalary() < max){ // criteria
+                res[j++] = employees[i];
+            }
+        }
+        return res;
     }
+
+    @Override
+    public double averageSalary(){
+        if (size == 0) {
+            return 0;
+        }
+        return totalSalary() / size;
+    }
+
+
 }
